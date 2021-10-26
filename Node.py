@@ -13,6 +13,7 @@ class Node:
 
     def update_strategy(self, neighbour):
         p = self.fermi_integral(self.fitness,neighbour.strategy, 10.0)
+
         if(random.random() < p):
             self.strategy = neighbour.strategy
                 
