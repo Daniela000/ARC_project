@@ -56,6 +56,8 @@ if __name__ == "__main__":
 
     size = 100
     k = 4
+    defe = []
+    coop = []
     for x in range(10):
         graph = nx.random_regular_graph(k, size)
         nx.relabel_nodes(graph, mapping=Node, copy=False)
@@ -80,21 +82,55 @@ if __name__ == "__main__":
         num_coop = 0
         old_num_coop = None
         num_def = 0
-        rows = []
+        #defe = []
+        #coop = []
+        #rows = []
+        i=0
+        row = [[],[]]
         while num_coop != old_num_coop:
+            #rows.append([])
+            defe.append([])
+            coop.append([])
             strategy = [node.strategy for node in graph.nodes()]
             old_num_coop = num_coop
             num_coop = strategy.count(True)
             num_def = strategy.count(False)
-            row = { 'n_coop' : num_coop, 'n_def' : num_def}
-            rows.append(row)
+            defe[i].append(num_def)
+            coop[i].append(num_coop)
             play("SH")
+            i+=1
 
-        df = pd.DataFrame(rows)
-        df.to_csv('homogenous_sim/simulation'+str(x)+'.csv')
+        #df = pd.DataFrame(rows)
+        #df.to_csv('homogenous_sim/simulation'+str(x)+'.csv')
 
-        fig = df.plot(y = ["n_coop", "n_def"]).get_figure()
-        fig.savefig('homogenous_sim/simulation'+str(x)+'.pdf')
+        #fig = df.plot(y = ["n_coop", "n_def"]).get_figure()
+        #fig.savefig('homogenous_sim/simulation'+str(x)+'.pdf')
+
+new_rows = []
+coop = [value for value in coop if value != []]
+defe = [value for value in defe if value != []]
+#print(rows)
+#for game in rows:
+    #print(game)
+    #average_coop = sum(game[0])/10
+    #average_def = sum(game[1])/10
+    #new_row = { 'avg_coop' : average_coop, 'avg_def' : average_def}
+    #new_rows.append(new_row)
+rows = {'avg_coop' : coop, 'avg_def': defe}
+print(rows)
+new_row = {'avg_coop' : [], 'avg_def' : []}
+for line in rows['avg_coop']:
+    new = sum(line)/len(line)
+    new_row['avg_coop'].append(new)
+for line in rows['avg_def']:
+    new = sum(line)/len(line)
+    new_row['avg_def'].append(new)
+print(new_row)
+df = pd.DataFrame(new_row)
+df.to_csv('homogenous_sim/avg.csv')
+
+fig = df.plot(y = ["avg_coop", "avg_def"]).get_figure()
+fig.savefig('homogenous_sim/avg.pdf')
 
 
 
