@@ -67,6 +67,30 @@ if __name__ == "__main__":
             heat[i].append(0)
     for a in range(10):
         graph = nx.barabasi_albert_graph(size,k)
+        for _ in range(2):
+            edges = list(graph.edges())
+            while 2 < len(edges):
+                edge1 = random.choice(edges)
+                edges.remove(edge1)
+                edge2 = random.choice(edges)
+                edges.remove(edge2)
+                if edge1[0] < edge2[1]:
+                    edge3 = (edge1[0], edge2[1])
+                else:
+                    edge3 = (edge2[1], edge1[0])
+                if edge2[0] < edge1[1]:
+                    edge4 = (edge2[0], edge1[1])
+                else:
+                    edge4 = (edge1[1], edge2[0])
+                if edge3 in edges or edge4 in edges:
+                    #dont do this because the number of edges would decrease
+                    edges.append(edge1)
+                    edges.append(edge2)
+                else:
+                    graph.remove_edge(edge1[0], edge1[1])
+                    graph.remove_edge(edge2[0], edge2[1])
+                    graph.add_edge(edge3[0], edge3[1])
+                    graph.add_edge(edge4[0], edge4[1])
         nx.relabel_nodes(graph, mapping=Node, copy=False)
         x=0
         for S in range(10,-11,-1):
@@ -125,7 +149,7 @@ if __name__ == "__main__":
                     play(S,T)
                 print("S",S)
                 print("T",T)
-                print("A",a)
+                print("A", a)
                 print("coops",num_coop)
                 #print("x " + str(x) + " aux " + str(aux))
                 heat[x][aux] += (num_coop/size)*10
@@ -168,10 +192,10 @@ new_rows = []
 print(heat)
 #ax = sns.heatmap(heat, vmin =0, vmax=100, xticklabels=x_label, yticklabels=y_label,cmap = "Spectral")
 #fig = ax.get_figure()
-#fig.savefig('heterogeneous_sim/heatmap.pdf')
+#fig.savefig('random_heterogeneous_sim/heatmap.pdf')
 fig = plt.figure()
 plt.rcParams["axes.grid"] = False
 
 img = plt.imshow(heat, cmap='jet', interpolation="spline16", vmin =0, vmax=100, extent = [0,2,-1,1])
 fig.colorbar(img)
-fig.savefig('heterogeneous_sim/heatmap.pdf')
+fig.savefig('random_heterogeneous_sim/heatmap.pdf')

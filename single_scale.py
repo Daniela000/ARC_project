@@ -66,7 +66,7 @@ if __name__ == "__main__":
         for _ in range(21):
             heat[i].append(0)
     for a in range(10):
-        graph = nx.barabasi_albert_graph(size,k)
+        graph = nx.erdos_renyi_graph(size, 0,5)
         nx.relabel_nodes(graph, mapping=Node, copy=False)
         x=0
         for S in range(10,-11,-1):
@@ -168,10 +168,10 @@ new_rows = []
 print(heat)
 #ax = sns.heatmap(heat, vmin =0, vmax=100, xticklabels=x_label, yticklabels=y_label,cmap = "Spectral")
 #fig = ax.get_figure()
-#fig.savefig('heterogeneous_sim/heatmap.pdf')
+#fig.savefig('single_scale_sim/heatmap.pdf')
 fig = plt.figure()
 plt.rcParams["axes.grid"] = False
 
 img = plt.imshow(heat, cmap='jet', interpolation="spline16", vmin =0, vmax=100, extent = [0,2,-1,1])
 fig.colorbar(img)
-fig.savefig('heterogeneous_sim/heatmap.pdf')
+fig.savefig('single_scale_sim/heatmap.pdf')
