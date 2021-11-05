@@ -43,6 +43,8 @@ def play(S,T):
 
     #compare the fitness of each node with a random node and update the stategy
     for node_y in graph.nodes():
+        if list(graph.neighbors(node_y)) == []:
+            break
         neighbour = random.choice(list(graph.neighbors(node_y)))
 
         if neighbour.fitness > node_y.fitness:
@@ -55,7 +57,7 @@ if __name__ == "__main__":
     #r = float(input("Introduce the r factor: "))
     #k = int(input("Indroduce the degree of each edge: "))
 
-    size = 10000
+    size = 1000
     k = 4
 
     heat = []
@@ -66,9 +68,10 @@ if __name__ == "__main__":
         for _ in range(21):
             heat[i].append(0)
     for a in range(10):
-        graph = nx.erdos_renyi_graph(size, 0,5)
+        graph = nx.watts_strogatz_graph(size, k,1)
         nx.relabel_nodes(graph, mapping=Node, copy=False)
         x=0
+        print(graph)
         for S in range(10,-11,-1):
             S *=0.1
             if a == 0:
@@ -171,7 +174,9 @@ print(heat)
 #fig.savefig('single_scale_sim/heatmap.pdf')
 fig = plt.figure()
 plt.rcParams["axes.grid"] = False
+plt.xlabel('T')
 
 img = plt.imshow(heat, cmap='jet', interpolation="spline16", vmin =0, vmax=100, extent = [0,2,-1,1])
+img.axes.get_yaxis().set_visible(False)
 fig.colorbar(img)
 fig.savefig('single_scale_sim/heatmap.pdf')

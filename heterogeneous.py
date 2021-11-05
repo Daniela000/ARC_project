@@ -56,7 +56,7 @@ if __name__ == "__main__":
     #k = int(input("Indroduce the degree of each edge: "))
 
     size = 10000
-    k = 4
+    k = 8
 
     heat = []
     y_label = []
@@ -171,7 +171,9 @@ print(heat)
 #fig.savefig('heterogeneous_sim/heatmap.pdf')
 fig = plt.figure()
 plt.rcParams["axes.grid"] = False
+plt.xlabel('T')
 
 img = plt.imshow(heat, cmap='jet', interpolation="spline16", vmin =0, vmax=100, extent = [0,2,-1,1])
+img.axes.get_yaxis().set_visible(False)
 fig.colorbar(img)
 fig.savefig('heterogeneous_sim/heatmap.pdf')

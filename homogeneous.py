@@ -55,7 +55,7 @@ if __name__ == "__main__":
     #r = float(input("Introduce the r factor: "))
     #k = int(input("Indroduce the degree of each edge: "))
 
-    size = 10000
+    size = 1000
     k = size - 1
 
     heat = []
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         for _ in range(21):
             heat[i].append(0)
     for a in range(10):
-        graph = nx.random_regular_graph(k, size)
+        graph = nx.complete_graph(size)
         nx.relabel_nodes(graph, mapping=Node, copy=False)
         x=0
         for S in range(10,-11,-1):
@@ -171,7 +171,9 @@ print(heat)
 #fig.savefig('homogeneous_sim/heatmap.pdf')
 fig = plt.figure()
 plt.rcParams["axes.grid"] = False
-
+plt.xlabel('T')
+plt.xlabel('S')
 img = plt.imshow(heat, cmap='jet', interpolation="spline16", vmin =0, vmax=100, extent = [0,2,-1,1])
-fig.colorbar(img)
+
+#fig.colorbar(img)
 fig.savefig('homogeneous_sim/heatmap.pdf')

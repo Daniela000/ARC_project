@@ -55,8 +55,8 @@ if __name__ == "__main__":
     #r = float(input("Introduce the r factor: "))
     #k = int(input("Indroduce the degree of each edge: "))
 
-    size = 10000
-    k = 4
+    size = 1000
+    k = 8
 
     heat = []
     y_label = []
@@ -195,7 +195,9 @@ print(heat)
 #fig.savefig('random_heterogeneous_sim/heatmap.pdf')
 fig = plt.figure()
 plt.rcParams["axes.grid"] = False
-
+plt.xlabel('T')
+plt.ylabel('S')
 img = plt.imshow(heat, cmap='jet', interpolation="spline16", vmin =0, vmax=100, extent = [0,2,-1,1])
-fig.colorbar(img)
+
+#fig.colorbar(img)
 fig.savefig('random_heterogeneous_sim/heatmap.pdf')
