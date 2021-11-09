@@ -29,10 +29,20 @@ pip install matplotlib
 ```
 
 ## Running
- Before running any program ensure you have a results/ directory:
+ Before running any program ensure you have the following directories:
  ```
- mkdir results
+ mkdir heterogeneous_sim
  ```
+  ```
+ mkdir homogeneous_sim
+ ```
+   ```
+ mkdir random_heterogeneous_sim
+ ```
+```
+ mkdir single_scale_sim
+ ```
+
  To get a heatmap comming from a complete fully connected graph run:
  ```
  python3 homogeneous.py
