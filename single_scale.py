@@ -3,7 +3,6 @@ from Node import Node
 import random
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns; sns.set_theme()
 
 def summation(node_y, node_x):
     summation = 0
@@ -57,7 +56,7 @@ if __name__ == "__main__":
     #r = float(input("Introduce the r factor: "))
     #k = int(input("Indroduce the degree of each edge: "))
 
-    size = 1000
+    size = 10000
     k = 4
 
     heat = []

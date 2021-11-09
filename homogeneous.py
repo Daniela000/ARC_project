@@ -3,7 +3,6 @@ from Node import Node
 import random
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns; sns.set_theme()
 
 def summation(node_y, node_x):
     summation = 0

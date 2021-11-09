@@ -3,7 +3,6 @@ from Node import Node
 import random
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns; sns.set_theme()
 
 def summation(node_y, node_x):
     summation = 0
@@ -55,7 +54,7 @@ if __name__ == "__main__":
     #r = float(input("Introduce the r factor: "))
     #k = int(input("Indroduce the degree of each edge: "))
 
-    size = 1000
+    size = 10000
     k = 8
 
     heat = []
@@ -67,7 +66,7 @@ if __name__ == "__main__":
             heat[i].append(0)
     for a in range(10):
         graph = nx.barabasi_albert_graph(size,k)
-        for _ in range(2):
+        for _ in range(10):
             edges = list(graph.edges())
             while 2 < len(edges):
                 edge1 = random.choice(edges)
@@ -152,7 +151,7 @@ if __name__ == "__main__":
                 print("A", a)
                 print("coops",num_coop)
                 #print("x " + str(x) + " aux " + str(aux))
-                heat[x][aux] += (num_coop/size)*10
+                heat[x][aux] += (num_coop/size)*100
                 #heat[x].append((num_coop/size)*100)
                 aux += 1
             x+=1
