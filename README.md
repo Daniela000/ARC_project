@@ -59,4 +59,4 @@ pip install matplotlib
  ```
  python3 heterogeneous.py
  ```
-The generated files would be located in the /results directory.
+The generated files would be located in the respective directories.
